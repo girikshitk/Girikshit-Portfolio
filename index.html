@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Girikshit Kumar - Product Designer & AI Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body>
+    <!-- Neural Trail Canvas -->
+    <canvas id="neural-trail"></canvas>
+
+    <!-- Global Header -->
+    <header class="global-header">
+      <a href="#" class="brand">GIRIKSHIT</a>
+      <div class="header-right">
+        <a href="https://www.linkedin.com/in/girikshit-kumar-2129ba27b/" target="_blank" class="neural-link interactive" aria-label="LinkedIn">
+            <i data-lucide="brain-circuit"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- Global Navigation nodes -->
+    <nav class="global-nav">
+        <ul>
+            <li><a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" class="interactive">[Context]</a></li>
+            <li><a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" class="interactive">[Problem]</a></li>
+            <li><a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" class="interactive">[Research]</a></li>
+            <li><a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" class="interactive">[Ideate]</a></li>
+            <li><a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" class="interactive">[Prototype]</a></li>
+            <li><a href="https://girikshitk.github.io/stencil-design-portfolio/" target="_blank" class="interactive highlight">[Service Design]</a></li>
+            <li><a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" class="interactive highlight">[AI Triage]</a></li>
+            <li><a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" class="interactive">[Impact]</a></li>
+        </ul>
+    </nav>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-bg-text">GIRIKSHIT KUMAR</div>
+        <div class="hero-content">
+          <h1>High-Performance Visual Design meets Functional AI & 3D Engineering.</h1>
+          <a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" class="cta-button interactive">Launch Case Study <i data-lucide="arrow-right"></i></a>
+        </div>
+      </section>
+
+      <!-- The Work Grid -->
+      <section class="work-section" id="work">
+        <h2>The Work.</h2>
+        <div class="project-grid">
+          
+          <!-- Gaurdian Card -->
+          <a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" class="project-card interactive" id="card-gaurdian">
+            <div class="card-bg"></div>
+            <div class="card-content">
+              <h3>Gaurdian</h3>
+              <p>SOS Mobility System</p>
+            </div>
+            <div class="terminal-overlay">
+              <div class="terminal-header">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="title">ai_triage.py - GaurdianCV</span>
+              </div>
+              <div class="terminal-body" id="gaurdian-terminal">
+                <!-- Log injected via JS -->
+              </div>
+            </div>
+          </a>
+
+          <!-- Valueline Card -->
+          <a href="https://valueline-3d-viewer.netlify.app/" target="_blank" class="project-card interactive card-3d" id="card-valueline">
+             <div class="card-content">
+              <h3>Valueline</h3>
+              <p>3D Experience</p>
+            </div>
+            <!-- Simulated Rotating 3D Object or actual webgl if needed, for simplicity we'll do CSS 3D cubes/tiles -->
+            <div class="cube-container">
+              <div class="cube">
+                <div class="face front">V</div>
+                <div class="face back">V</div>
+                <div class="face right"></div>
+                <div class="face left"></div>
+                <div class="face top"></div>
+                <div class="face bottom"></div>
+              </div>
+            </div>
+          </a>
+
+          <!-- 2D Pixel Art Game Card -->
+          <a href="https://www.behance.net/gallery/228367639/My-First-Game-Design-Project" target="_blank" class="project-card interactive" id="card-pixelgame">
+            <div class="card-content">
+               <h3>Visual Craft</h3>
+               <p>2D Pixel Art Game</p>
+            </div>
+            <div class="pixel-sprite"></div>
+          </a>
+
+        </div>
+      </section>
+
+      <!-- Experience & Storefront Nodes -->
+      <section class="nodes-section">
+        <h2>Experience Nodes.</h2>
+        <div class="nodes-grid">
+          
+          <a href="https://girikshitk.github.io/stencil-design-portfolio/" target="_blank" class="node-card interactive">
+             <div class="node-icon"><i data-lucide="pen-tool"></i></div>
+             <div class="node-info">
+               <h3>Stencil Design</h3>
+               <p>AI-enhanced creatives timeline.</p>
+             </div>
+          </a>
+
+          <a href="https://pixel-inks-2.myshopify.com/" target="_blank" class="node-card interactive">
+            <div class="node-icon"><i data-lucide="shopping-bag"></i></div>
+             <div class="node-info">
+               <h3>Pixel Inks</h3>
+               <p>Merchant Experience (MX) Dashboard.</p>
+             </div>
+          </a>
+
+        </div>
+      </section>
+
+      <!-- Technical Competencies -->
+      <section class="competencies-section">
+         <h2>Technical Competencies.</h2>
+         <div class="chart-container">
+           <canvas id="competencyChart"></canvas>
+         </div>
+      </section>
+
+    </main>
+
+    <script type="module" src="/main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+  </body>
+</html>
