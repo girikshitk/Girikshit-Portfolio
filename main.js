@@ -275,8 +275,8 @@ new Chart(ctxChart, {
 
 
 // --- PROJECT SOCIAL LIKES & GOOGLE SHEET BACKEND ---
-// Paste your Google Apps Script Web App URL here to sync live with your Google Sheet:
-const GOOGLE_SHEET_API_URL = ''; // e.g. 'https://script.google.com/macros/s/.../exec'
+// Connected to user's Google Sheet Web App:
+const GOOGLE_SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbwYvLGB-mOJtvm5Ed2Zxi8PjR2EWzoCe_6lLYJOJYTBxAEO9SPWrg_Y54n55_ejdvunxg/exec';
 
 const defaultLikeCounts = {
   gaurdian: 64,
