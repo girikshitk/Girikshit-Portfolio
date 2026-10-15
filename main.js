@@ -588,6 +588,13 @@ function initTripGallery() {
     item.addEventListener('click', () => openGalleryItem(item));
   });
   closeButtons.forEach((button) => button.addEventListener('click', closeGallery));
+  modalImage.addEventListener('click', closeGallery);
+  modalImage.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      closeGallery();
+    }
+  });
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && !modal.hidden) closeGallery();
   });

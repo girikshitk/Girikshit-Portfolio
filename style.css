@@ -835,6 +835,7 @@ main {
   height: 100%;
   max-height: calc(88vh - 108px);
   object-fit: contain;
+  cursor: zoom-out;
 }
 
 .gallery-modal-caption {
