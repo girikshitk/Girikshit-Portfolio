@@ -107,30 +107,70 @@ function animateCursor() {
 animateCursor();
 
 
-// --- VALUELINE 3D TILT EFFECT ---
+// --- VALUELINE 3D INTERACTIVE ROTATE & REVOLVE ---
 const valuelineCard = document.getElementById('card-valueline');
 const cubeContainer = valuelineCard.querySelector('.cube-container');
+const cube = valuelineCard.querySelector('.cube');
+
+let cubeAngleX = 25;
+let cubeAngleY = 35;
+let revolveAngle = 0;
+let lastX = null;
+let lastY = null;
+
+valuelineCard.addEventListener('mouseenter', (e) => {
+  lastX = e.clientX;
+  lastY = e.clientY;
+  cubeContainer.style.transition = 'none';
+});
 
 valuelineCard.addEventListener('mousemove', (e) => {
+  if (lastX === null || lastY === null) {
+    lastX = e.clientX;
+    lastY = e.clientY;
+    return;
+  }
+
+  const deltaX = e.clientX - lastX;
+  const deltaY = e.clientY - lastY;
+  lastX = e.clientX;
+  lastY = e.clientY;
+
+  // Only rotate and revolve when the cursor is physically moving
+  if (deltaX === 0 && deltaY === 0) return;
+
+  const moveDist = Math.hypot(deltaX, deltaY);
+
+  // 1. Rotate the cube on its axes as cursor moves
+  cubeAngleY += deltaX * 0.6;
+  cubeAngleX -= deltaY * 0.6;
+  cube.style.transform = `rotateX(${cubeAngleX}deg) rotateY(${cubeAngleY}deg)`;
+
+  // 2. Revolve the cube around the card's center
   const rect = valuelineCard.getBoundingClientRect();
-  const x = e.clientX - rect.left; // x position within the element
-  const y = e.clientY - rect.top;  // y position within the element
-  
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
   const centerX = rect.width / 2;
   const centerY = rect.height / 2;
-  
-  // Calculate tilt angle based on distance from center
-  const rotateX = ((y - centerY) / centerY) * -15; // inverted y axis tilt
-  const rotateY = ((x - centerX) / centerX) * 15;
 
-  cubeContainer.style.transform = `translate(-50%, -50%) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  // Orbital revolution around center advances with cursor movement
+  revolveAngle += moveDist * 0.02;
+  const orbitRadius = 24;
+  const orbitX = Math.cos(revolveAngle) * orbitRadius + ((x - centerX) / centerX) * 15;
+  const orbitY = Math.sin(revolveAngle) * (orbitRadius * 0.6) + ((y - centerY) / centerY) * 15;
+
+  // 3D perspective tilt
+  const tiltX = ((y - centerY) / centerY) * -15;
+  const tiltY = ((x - centerX) / centerX) * 15;
+
+  cubeContainer.style.transform = `translate(calc(-50% + ${orbitX}px), calc(-50% + ${orbitY}px)) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
 });
+
 valuelineCard.addEventListener('mouseleave', () => {
-  cubeContainer.style.transform = `translate(-50%, -50%) rotateX(0deg) rotateY(0deg)`;
-  cubeContainer.style.transition = 'transform 0.5s ease';
-});
-valuelineCard.addEventListener('mouseenter', () => {
-  cubeContainer.style.transition = 'none'; // snappy follow
+  lastX = null;
+  lastY = null;
+  cubeContainer.style.transition = 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
+  cubeContainer.style.transform = 'translate(-50%, -50%) rotateX(0deg) rotateY(0deg)';
 });
 
 
