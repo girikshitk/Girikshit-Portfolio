@@ -274,7 +274,10 @@ new Chart(ctxChart, {
 });
 
 
-// --- PROJECT SOCIAL LIKES & INTERACTIVE NAVIGATION ---
+// --- PROJECT SOCIAL LIKES & GOOGLE SHEET BACKEND ---
+// Paste your Google Apps Script Web App URL here to sync live with your Google Sheet:
+const GOOGLE_SHEET_API_URL = ''; // e.g. 'https://script.google.com/macros/s/.../exec'
+
 const defaultLikeCounts = {
   gaurdian: 64,
   valueline: 56,
@@ -282,6 +285,37 @@ const defaultLikeCounts = {
   redthumb: 31,
   aura: 61
 };
+
+async function syncWithGoogleSheet(projectId, delta) {
+  if (!GOOGLE_SHEET_API_URL) return;
+  try {
+    const url = `${GOOGLE_SHEET_API_URL}?action=like&project=${encodeURIComponent(projectId)}&delta=${encodeURIComponent(delta)}&info=${encodeURIComponent(navigator.userAgent.slice(0, 50))}`;
+    await fetch(url, { mode: 'no-cors' });
+  } catch (err) {
+    console.warn('Could not sync like to Google Sheet:', err);
+  }
+}
+
+async function fetchLiveLikesFromSheet() {
+  if (!GOOGLE_SHEET_API_URL) return;
+  try {
+    const res = await fetch(GOOGLE_SHEET_API_URL);
+    const data = await res.json();
+    if (data && data.likes) {
+      Object.entries(data.likes).forEach(([projectId, count]) => {
+        const countKey = `portfolio_v2_likes_${projectId}`;
+        localStorage.setItem(countKey, count);
+        const btn = document.querySelector(`.like-btn[data-project="${projectId}"]`);
+        if (btn) {
+          const countEl = btn.querySelector('.like-count');
+          if (countEl) countEl.textContent = count;
+        }
+      });
+    }
+  } catch (err) {
+    console.warn('Could not fetch likes from Google Sheet:', err);
+  }
+}
 
 function initProjectLikes() {
   const likeButtons = document.querySelectorAll('.like-btn');
@@ -317,13 +351,16 @@ function initProjectLikes() {
       let currentCount = parseInt(localStorage.getItem(countKey), 10);
       if (isNaN(currentCount)) currentCount = count;
 
+      let delta = 1;
       if (currentlyLiked) {
         btn.classList.remove('liked');
         currentCount = Math.max(0, currentCount - 1);
+        delta = -1;
         localStorage.setItem(likedKey, 'false');
       } else {
         btn.classList.add('liked');
         currentCount += 1;
+        delta = 1;
         localStorage.setItem(likedKey, 'true');
       }
 
@@ -331,8 +368,14 @@ function initProjectLikes() {
       if (countEl) {
         countEl.textContent = currentCount;
       }
+
+      // Sync live to Google Sheet backend
+      syncWithGoogleSheet(projectId, delta);
     });
   });
+
+  // Fetch live global likes from Google Sheet if URL is configured
+  fetchLiveLikesFromSheet();
 
   // Card background click to open URL (excluding like button)
   const cards = document.querySelectorAll('.project-card');
