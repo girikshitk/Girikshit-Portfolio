@@ -7,198 +7,273 @@
     <title>Girikshit Kumar - Product Designer & AI Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
 </head>
   <body>
-    <!-- Sticky Navigation -->
+
+    <!-- Minimal Navigation -->
     <header class="nav" id="nav">
-      <a href="#hero" class="nav-brand">GIRIKSHIT</a>
+      <a href="#top" class="nav-brand">Girikshit</a>
       <nav class="nav-links">
         <a href="#work" class="nav-link">Work</a>
         <a href="#expertise" class="nav-link">Expertise</a>
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
-      <a href="https://www.linkedin.com/in/girikshit-kumar-2129ba27b/" target="_blank" rel="noopener noreferrer" class="nav-cta interactive" aria-label="LinkedIn Profile">
-        <svg class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+      <a href="https://www.linkedin.com/in/girikshit-kumar-2129ba27b/" target="_blank" rel="noopener noreferrer" class="nav-cta">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
           <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
         </svg>
         <span>LinkedIn</span>
-        <i data-lucide="arrow-up-right" class="external-arrow"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+        </svg>
       </a>
+      <button class="nav-menu-btn" id="menuBtn" aria-label="Toggle menu">
+        <span></span><span></span>
+      </button>
     </header>
 
-    <main>
-      <!-- Hero Section -->
-      <section class="hero" id="hero">
-        <div class="hero-bg-text">GIRIKSHIT KUMAR</div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#work" class="mobile-menu-link">Work</a>
+      <a href="#expertise" class="mobile-menu-link">Expertise</a>
+      <a href="#contact" class="mobile-menu-link">Contact</a>
+      <a href="https://www.linkedin.com/in/girikshit-kumar-2129ba27b/" target="_blank" rel="noopener noreferrer" class="mobile-menu-link">LinkedIn</a>
+    </div>
+
+    <main id="top">
+
+      <!-- Hero -->
+      <section class="hero">
         <div class="hero-content">
-          <p class="hero-eyebrow">Product Designer &amp; AI Engineer</p>
-          <h1>High-Performance Visual Design meets Functional AI &amp; 3D Engineering.</h1>
-          <a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" rel="noopener noreferrer" class="cta-button interactive">
+          <h1>
+            High-Performance Visual Design meets Functional AI &amp; 3D Engineering.
+          </h1>
+          <a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" rel="noopener noreferrer" class="hero-cta">
             <span>Launch Case Study</span>
-            <i data-lucide="arrow-right"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
           </a>
         </div>
-        <div class="hero-scroll-hint">
+        <div class="hero-scroll">
           <span>Scroll</span>
-          <div class="scroll-line"></div>
+          <div class="hero-scroll-line"></div>
         </div>
       </section>
 
-      <!-- The Work Grid -->
-      <section class="work-section reveal" id="work">
-        <div class="section-header">
-          <span class="section-index">01</span>
-          <h2>The Work.</h2>
+      <!-- Projects -->
+      <section class="projects" id="work">
+        <div class="section-label">
+          <span class="section-number">01</span>
+          <h2>Selected Work</h2>
         </div>
-        <div class="project-grid">
 
-          <!-- Gaurdian Card -->
-          <div class="project-card interactive" id="card-gaurdian" data-url="https://girikshitk.github.io/Gaurdian-Web/">
-            <div class="card-content">
+        <!-- Gaurdian -->
+        <article class="project" data-url="https://girikshitk.github.io/Gaurdian-Web/" id="card-gaurdian">
+          <div class="project-image">
+            <img src="https://images.pexels.com/photos/6831054/pexels-photo-6831054.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Gaurdian SOS Mobility System" loading="lazy" />
+            <div class="project-overlay">
+              <div class="terminal-mini">
+                <div class="terminal-header">
+                  <span class="dot red"></span>
+                  <span class="dot yellow"></span>
+                  <span class="dot green"></span>
+                  <span class="terminal-title">ai_triage.py - GaurdianCV</span>
+                </div>
+                <div class="terminal-body" id="gaurdian-terminal"></div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
               <h3>Gaurdian</h3>
               <p>SOS Mobility System</p>
             </div>
-            <div class="terminal-overlay">
-              <div class="terminal-header">
-                <span class="dot red"></span>
-                <span class="dot yellow"></span>
-                <span class="dot green"></span>
-                <span class="title">ai_triage.py - GaurdianCV</span>
-              </div>
-              <div class="terminal-body" id="gaurdian-terminal"></div>
-            </div>
-            <div class="card-actions">
-              <button type="button" class="action-btn like-btn interactive" data-project="gaurdian" aria-label="Like Gaurdian">
-                <svg class="heart-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-                </svg>
-                <span class="like-count">64</span>
-              </button>
-              <a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" rel="noopener noreferrer" class="action-btn view-btn interactive">
-                <span>View</span>
-                <i data-lucide="arrow-up-right"></i>
-              </a>
+            <div class="project-meta">
+              <span class="tag">Case Study</span>
             </div>
           </div>
+          <div class="project-actions">
+            <button type="button" class="like-btn" data-project="gaurdian" aria-label="Like Gaurdian">
+              <svg class="heart-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+              </svg>
+              <span class="like-count">64</span>
+            </button>
+            <a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" rel="noopener noreferrer" class="view-link">
+              <span>View Project</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+              </svg>
+            </a>
+          </div>
+        </article>
 
-          <!-- Valueline Card -->
-          <div class="project-card interactive card-3d" id="card-valueline" data-url="https://valueline-3d-viewer.netlify.app/">
-            <div class="card-content">
+        <!-- Valueline -->
+        <article class="project" data-url="https://valueline-3d-viewer.netlify.app/" id="card-valueline">
+          <div class="project-image">
+            <img src="https://images.pexels.com/photos/28918449/pexels-photo-28918449.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Valueline 3D Experience" loading="lazy" />
+            <div class="project-overlay">
+              <div class="cube-container">
+                <div class="cube">
+                  <div class="face front">V</div>
+                  <div class="face back">V</div>
+                  <div class="face right"></div>
+                  <div class="face left"></div>
+                  <div class="face top"></div>
+                  <div class="face bottom"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
               <h3>Valueline</h3>
               <p>3D Experience</p>
             </div>
-            <div class="cube-container">
-              <div class="cube">
-                <div class="face front">V</div>
-                <div class="face back">V</div>
-                <div class="face right"></div>
-                <div class="face left"></div>
-                <div class="face top"></div>
-                <div class="face bottom"></div>
-              </div>
-            </div>
-            <div class="card-actions">
-              <button type="button" class="action-btn like-btn interactive" data-project="valueline" aria-label="Like Valueline">
-                <svg class="heart-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-                </svg>
-                <span class="like-count">56</span>
-              </button>
-              <a href="https://valueline-3d-viewer.netlify.app/" target="_blank" rel="noopener noreferrer" class="action-btn view-btn interactive">
-                <span>View</span>
-                <i data-lucide="arrow-up-right"></i>
-              </a>
+            <div class="project-meta">
+              <span class="tag">3D / WebGL</span>
             </div>
           </div>
+          <div class="project-actions">
+            <button type="button" class="like-btn" data-project="valueline" aria-label="Like Valueline">
+              <svg class="heart-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+              </svg>
+              <span class="like-count">56</span>
+            </button>
+            <a href="https://valueline-3d-viewer.netlify.app/" target="_blank" rel="noopener noreferrer" class="view-link">
+              <span>View Project</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+              </svg>
+            </a>
+          </div>
+        </article>
 
-          <!-- Visual Craft 2D Pixel Art Game Card -->
-          <div class="project-card interactive" id="card-pixelgame" data-url="https://www.behance.net/gallery/228367639/My-First-Game-Design-Project">
-            <div class="card-content">
+        <!-- Visual Craft -->
+        <article class="project" data-url="https://www.behance.net/gallery/228367639/My-First-Game-Design-Project" id="card-pixelgame">
+          <div class="project-image">
+            <img src="https://images.pexels.com/photos/4835429/pexels-photo-4835429.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Visual Craft 2D Pixel Art Game" loading="lazy" />
+            <div class="project-overlay">
+              <div class="pixel-sprite"></div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
               <h3>Visual Craft</h3>
               <p>2D Pixel Art Game</p>
             </div>
-            <div class="pixel-sprite"></div>
-            <div class="card-actions">
-              <button type="button" class="action-btn like-btn interactive" data-project="pixelgame" aria-label="Like Visual Craft">
-                <svg class="heart-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-                </svg>
-                <span class="like-count">45</span>
-              </button>
-              <a href="https://www.behance.net/gallery/228367639/My-First-Game-Design-Project" target="_blank" rel="noopener noreferrer" class="action-btn view-btn interactive">
-                <span>View</span>
-                <i data-lucide="arrow-up-right"></i>
-              </a>
+            <div class="project-meta">
+              <span class="tag">Game Design</span>
             </div>
           </div>
+          <div class="project-actions">
+            <button type="button" class="like-btn" data-project="pixelgame" aria-label="Like Visual Craft">
+              <svg class="heart-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+              </svg>
+              <span class="like-count">45</span>
+            </button>
+            <a href="https://www.behance.net/gallery/228367639/My-First-Game-Design-Project" target="_blank" rel="noopener noreferrer" class="view-link">
+              <span>View Project</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+              </svg>
+            </a>
+          </div>
+        </article>
 
-          <!-- RedThumb3D Card -->
-          <div class="project-card interactive" id="card-redthumb" data-url="https://girikshitk.github.io/RedThumb3D/">
-            <div class="card-content">
+        <!-- RedThumb3D -->
+        <article class="project" data-url="https://girikshitk.github.io/RedThumb3D/" id="card-redthumb">
+          <div class="project-image">
+            <img src="https://images.pexels.com/photos/40180227/pexels-photo-40180227.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="RedThumb3D Pokémon Figurine Catalogue" loading="lazy" />
+            <div class="project-overlay">
+              <div class="redthumb-visual">
+                <div class="print-bed">
+                  <div class="print-scanline"></div>
+                  <div class="poke-silhouette"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
               <h3>RedThumb3D</h3>
               <p>Pokémon 3D Figurine Catalogue</p>
             </div>
-            <div class="redthumb-visual">
-              <div class="print-bed">
-                <div class="print-scanline"></div>
-                <div class="poke-silhouette"></div>
-              </div>
-            </div>
-            <div class="card-actions">
-              <button type="button" class="action-btn like-btn interactive" data-project="redthumb" aria-label="Like RedThumb3D">
-                <svg class="heart-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-                </svg>
-                <span class="like-count">31</span>
-              </button>
-              <a href="https://girikshitk.github.io/RedThumb3D/" target="_blank" rel="noopener noreferrer" class="action-btn view-btn interactive">
-                <span>View</span>
-                <i data-lucide="arrow-up-right"></i>
-              </a>
+            <div class="project-meta">
+              <span class="tag">3D / E-commerce</span>
             </div>
           </div>
+          <div class="project-actions">
+            <button type="button" class="like-btn" data-project="redthumb" aria-label="Like RedThumb3D">
+              <svg class="heart-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+              </svg>
+              <span class="like-count">31</span>
+            </button>
+            <a href="https://girikshitk.github.io/RedThumb3D/" target="_blank" rel="noopener noreferrer" class="view-link">
+              <span>View Project</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+              </svg>
+            </a>
+          </div>
+        </article>
 
-          <!-- AURA Earbud Card -->
-          <div class="project-card interactive" id="card-aura" data-url="https://girikshitk.github.io/AURA-Earbud/">
-            <div class="card-content">
+        <!-- AURA -->
+        <article class="project" data-url="https://girikshitk.github.io/AURA-Earbud/" id="card-aura">
+          <div class="project-image">
+            <img src="https://images.pexels.com/photos/33797659/pexels-photo-33797659.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="AURA 3D Earbud Exploded Acoustics" loading="lazy" />
+            <div class="project-overlay">
+              <div class="aura-visual">
+                <div class="aura-wave ring-1"></div>
+                <div class="aura-wave ring-2"></div>
+                <div class="aura-wave ring-3"></div>
+                <div class="earbud-core">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
               <h3>AURA</h3>
               <p>3D Earbud Exploded Acoustics</p>
             </div>
-            <div class="aura-visual">
-              <div class="aura-wave ring-1"></div>
-              <div class="aura-wave ring-2"></div>
-              <div class="aura-wave ring-3"></div>
-              <div class="earbud-core">
-                <i data-lucide="headphones"></i>
-              </div>
-            </div>
-            <div class="card-actions">
-              <button type="button" class="action-btn like-btn interactive" data-project="aura" aria-label="Like AURA Earbud">
-                <svg class="heart-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-                </svg>
-                <span class="like-count">61</span>
-              </button>
-              <a href="https://girikshitk.github.io/AURA-Earbud/" target="_blank" rel="noopener noreferrer" class="action-btn view-btn interactive">
-                <span>View</span>
-                <i data-lucide="arrow-up-right"></i>
-              </a>
+            <div class="project-meta">
+              <span class="tag">3D / Product</span>
             </div>
           </div>
-
-        </div>
+          <div class="project-actions">
+            <button type="button" class="like-btn" data-project="aura" aria-label="Like AURA Earbud">
+              <svg class="heart-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+              </svg>
+              <span class="like-count">61</span>
+            </button>
+            <a href="https://girikshitk.github.io/AURA-Earbud/" target="_blank" rel="noopener noreferrer" class="view-link">
+              <span>View Project</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+              </svg>
+            </a>
+          </div>
+        </article>
       </section>
 
-      <!-- Technical Competencies -->
-      <section class="competencies-section reveal" id="expertise">
-        <div class="section-header">
-          <span class="section-index">02</span>
-          <h2>Technical Competencies.</h2>
+      <!-- Expertise -->
+      <section class="expertise" id="expertise">
+        <div class="section-label">
+          <span class="section-number">02</span>
+          <h2>Technical Competencies</h2>
         </div>
         <div class="chart-container">
           <canvas id="competencyChart"></canvas>
@@ -206,32 +281,33 @@
       </section>
 
       <!-- Contact -->
-      <section class="contact-section reveal" id="contact">
-        <div class="section-header">
-          <span class="section-index">03</span>
-          <h2>Contact.</h2>
+      <section class="contact" id="contact">
+        <div class="section-label">
+          <span class="section-number">03</span>
+          <h2>Contact</h2>
         </div>
         <div class="contact-content">
           <p class="contact-lead">Open to collaborations in product design, AI engineering, and 3D experiences.</p>
-          <a href="https://www.linkedin.com/in/girikshit-kumar-2129ba27b/" target="_blank" rel="noopener noreferrer" class="contact-link interactive">
-            <svg class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <a href="https://www.linkedin.com/in/girikshit-kumar-2129ba27b/" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
             </svg>
             <span>Connect on LinkedIn</span>
-            <i data-lucide="arrow-up-right" class="external-arrow"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+            </svg>
           </a>
         </div>
-        <footer class="site-footer">
-          <span>GIRIKSHIT KUMAR</span>
-          <span class="footer-meta">Product Designer &amp; AI Engineer</span>
-        </footer>
       </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <span>Girikshit Kumar</span>
+        <span class="footer-meta">Product Designer &amp; AI Engineer</span>
+      </footer>
 
     </main>
 
     <script type="module" src="/main.js"></script>
-    <script>
-        lucide.createIcons();
-    </script>
   </body>
 </html>

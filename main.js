@@ -4,15 +4,25 @@ import Chart from 'chart.js/auto';
 // --- STICKY NAV SCROLL EFFECT ---
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 20) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
+  nav.classList.toggle('scrolled', window.scrollY > 20);
 }, { passive: true });
 
+// --- MOBILE MENU ---
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click', () => {
+  menuBtn.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+document.querySelectorAll('.mobile-menu-link').forEach(link => {
+  link.addEventListener('click', () => {
+    menuBtn.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  });
+});
+
 // --- SCROLL REVEAL ---
-const revealEls = document.querySelectorAll('.reveal');
+const revealTargets = document.querySelectorAll('.project, .expertise, .contact');
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -20,25 +30,23 @@ const revealObserver = new IntersectionObserver((entries) => {
       revealObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-revealEls.forEach(el => revealObserver.observe(el));
+revealTargets.forEach(el => revealObserver.observe(el));
 
-// --- VALUELINE 3D INTERACTIVE ROTATE & REVOLVE ---
+// --- VALUELINE 3D CUBE INTERACTION ---
 const valuelineCard = document.getElementById('card-valueline');
 const cubeContainer = valuelineCard.querySelector('.cube-container');
 const cube = valuelineCard.querySelector('.cube');
 
 let cubeAngleX = 25;
 let cubeAngleY = 35;
-let revolveAngle = 0;
 let lastX = null;
 let lastY = null;
 
 valuelineCard.addEventListener('mouseenter', (e) => {
   lastX = e.clientX;
   lastY = e.clientY;
-  cubeContainer.style.transition = 'none';
 });
 
 valuelineCard.addEventListener('mousemove', (e) => {
@@ -55,34 +63,15 @@ valuelineCard.addEventListener('mousemove', (e) => {
 
   if (deltaX === 0 && deltaY === 0) return;
 
-  const moveDist = Math.hypot(deltaX, deltaY);
-
   cubeAngleY += deltaX * 0.6;
   cubeAngleX -= deltaY * 0.6;
   cube.style.transform = `rotateX(${cubeAngleX}deg) rotateY(${cubeAngleY}deg)`;
-
-  const rect = valuelineCard.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-  const centerX = rect.width / 2;
-  const centerY = rect.height / 2;
-
-  revolveAngle += moveDist * 0.02;
-  const orbitRadius = 24;
-  const orbitX = Math.cos(revolveAngle) * orbitRadius + ((x - centerX) / centerX) * 15;
-  const orbitY = Math.sin(revolveAngle) * (orbitRadius * 0.6) + ((y - centerY) / centerY) * 15;
-
-  const tiltX = ((y - centerY) / centerY) * -15;
-  const tiltY = ((x - centerX) / centerX) * 15;
-
-  cubeContainer.style.transform = `translate(calc(-50% + ${orbitX}px), calc(-50% + ${orbitY}px)) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
 });
 
 valuelineCard.addEventListener('mouseleave', () => {
   lastX = null;
   lastY = null;
-  cubeContainer.style.transition = 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
-  cubeContainer.style.transform = 'translate(-50%, -50%) rotateX(0deg) rotateY(0deg)';
+  cube.style.transform = 'rotateX(25deg) rotateY(35deg)';
 });
 
 // --- GAURDIAN TERMINAL SIMULATION ---
@@ -108,9 +97,9 @@ gaurdianCard.addEventListener('mouseenter', () => {
   terminalBody.innerHTML = '';
   logIndex = 0;
   terminalInterval = setInterval(() => {
-    if(logIndex < logs.length) {
+    if (logIndex < logs.length) {
       const p = document.createElement('div');
-      p.innerText = '> ' + logs[logIndex];
+      p.textContent = '> ' + logs[logIndex];
       terminalBody.appendChild(p);
       logIndex++;
     } else {
@@ -125,8 +114,8 @@ gaurdianCard.addEventListener('mouseleave', () => {
 
 // --- TECHNICAL COMPETENCIES RADAR CHART ---
 const ctxChart = document.getElementById('competencyChart').getContext('2d');
-Chart.defaults.font.family = "'JetBrains Mono', monospace";
-Chart.defaults.color = '#888';
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.color = '#999999';
 
 new Chart(ctxChart, {
   type: 'radar',
@@ -143,23 +132,23 @@ new Chart(ctxChart, {
     datasets: [{
       label: 'Skill Proficiency',
       data: [90, 85, 75, 85, 90, 85, 90],
-      backgroundColor: 'rgba(204, 255, 0, 0.15)',
-      borderColor: '#CCFF00',
-      pointBackgroundColor: '#CCFF00',
-      pointBorderColor: '#000',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: '#CCFF00',
+      backgroundColor: 'rgba(17, 17, 17, 0.08)',
+      borderColor: '#111111',
+      pointBackgroundColor: '#111111',
+      pointBorderColor: '#FAFAF7',
+      pointHoverBackgroundColor: '#CCFF00',
+      pointHoverBorderColor: '#111111',
       borderWidth: 2
     }]
   },
   options: {
     scales: {
       r: {
-        angleLines: { color: 'rgba(255, 255, 255, 0.08)' },
-        grid: { color: 'rgba(255, 255, 255, 0.08)' },
+        angleLines: { color: 'rgba(0, 0, 0, 0.06)' },
+        grid: { color: 'rgba(0, 0, 0, 0.06)' },
         pointLabels: {
-          color: '#A1A1AA',
-          font: { size: 11 }
+          color: '#555555',
+          font: { size: 11, family: "'Inter', sans-serif", weight: '500' }
         },
         ticks: {
           display: false,
@@ -172,11 +161,13 @@ new Chart(ctxChart, {
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: '#131316',
-        titleFont: { family: "'JetBrains Mono', monospace" },
-        bodyFont: { family: "'JetBrains Mono', monospace" },
+        backgroundColor: '#111111',
+        titleFont: { family: "'Inter', sans-serif", size: 12 },
+        bodyFont: { family: "'Inter', sans-serif", size: 12 },
         borderColor: 'rgba(255,255,255,0.1)',
-        borderWidth: 1
+        borderWidth: 1,
+        padding: 10,
+        cornerRadius: 6,
       }
     }
   }
@@ -240,14 +231,10 @@ function initProjectLikes() {
     }
 
     const isLiked = localStorage.getItem(likedKey) === 'true';
-    if (isLiked) {
-      btn.classList.add('liked');
-    }
+    if (isLiked) btn.classList.add('liked');
 
     const countEl = btn.querySelector('.like-count');
-    if (countEl) {
-      countEl.textContent = count;
-    }
+    if (countEl) countEl.textContent = count;
 
     btn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -271,9 +258,7 @@ function initProjectLikes() {
       }
 
       localStorage.setItem(countKey, currentCount);
-      if (countEl) {
-        countEl.textContent = currentCount;
-      }
+      if (countEl) countEl.textContent = currentCount;
 
       syncWithGoogleSheet(projectId, delta);
     });
@@ -281,21 +266,16 @@ function initProjectLikes() {
 
   fetchLiveLikesFromSheet();
 
-  const cards = document.querySelectorAll('.project-card');
+  // Card click opens URL (excluding buttons)
+  const cards = document.querySelectorAll('.project');
   cards.forEach(card => {
     card.addEventListener('click', (e) => {
       if (e.target.closest('.like-btn')) return;
-      if (e.target.closest('.view-btn')) return;
+      if (e.target.closest('.view-link')) return;
       const url = card.dataset.url;
-      if (url) {
-        window.open(url, '_blank', 'noopener,noreferrer');
-      }
+      if (url) window.open(url, '_blank', 'noopener,noreferrer');
     });
   });
 }
 
 initProjectLikes();
-
-if (typeof window.lucide !== 'undefined') {
-  window.lucide.createIcons();
-}
