@@ -7,6 +7,55 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 20);
 }, { passive: true });
 
+// --- CUSTOM CURSOR ---
+const cursor = document.querySelector('.custom-cursor');
+const cursorDot = document.querySelector('.cursor-dot');
+const cursorRing = document.querySelector('.cursor-ring');
+const finePointer = window.matchMedia('(pointer: fine)').matches;
+let cursorClickTimer;
+
+if (finePointer) {
+  document.body.classList.add('cursor-active');
+
+  window.addEventListener('pointermove', (event) => {
+    cursor.classList.add('is-visible');
+    cursorDot.style.left = `${event.clientX}px`;
+    cursorDot.style.top = `${event.clientY}px`;
+    cursorRing.style.left = `${event.clientX}px`;
+    cursorRing.style.top = `${event.clientY}px`;
+  }, { passive: true });
+
+  document.addEventListener('pointerover', (event) => {
+    const target = event.target;
+    if (target instanceof Element && target.closest('a, button, .project')) {
+      cursor.classList.add('is-hovering');
+    }
+  });
+
+  document.addEventListener('pointerout', (event) => {
+    const target = event.target;
+    if (target instanceof Element && target.closest('a, button, .project')) {
+      cursor.classList.remove('is-hovering');
+    }
+  });
+
+  document.addEventListener('pointerdown', () => {
+    window.clearTimeout(cursorClickTimer);
+    cursor.classList.add('is-clicking');
+    cursorClickTimer = window.setTimeout(() => {
+      cursor.classList.remove('is-clicking');
+    }, 360);
+  });
+
+  document.addEventListener('pointerleave', () => {
+    cursor.classList.remove('is-visible');
+  });
+
+  document.addEventListener('pointerenter', () => {
+    cursor.classList.add('is-visible');
+  });
+}
+
 // --- MOBILE MENU ---
 const menuBtn = document.getElementById('menuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
