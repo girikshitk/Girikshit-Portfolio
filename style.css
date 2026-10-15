@@ -421,16 +421,15 @@ main {
 
 .shape.is-dragging span {
   border-color: rgba(17, 17, 17, 0.35);
-  box-shadow: inset 8px 8px 18px rgba(255, 255, 255, 0.9), inset -10px -12px 24px rgba(17, 17, 17, 0.12), 0 0 0 8px rgba(204, 255, 0, 0.08);
+  box-shadow: inset 6px 6px 14px rgba(255, 255, 255, 0.6), inset -8px -10px 20px rgba(17, 17, 17, 0.2), 0 0 0 8px rgba(204, 255, 0, 0.12);
 }
 
 .shape span {
   display: block;
   width: 100%;
   height: 100%;
-  border: 1px solid rgba(17, 17, 17, 0.16);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(224, 224, 215, 0.36));
-  box-shadow: inset 8px 8px 18px rgba(255, 255, 255, 0.8), inset -10px -12px 24px rgba(17, 17, 17, 0.08);
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  box-shadow: inset 6px 6px 14px rgba(255, 255, 255, 0.45), inset -8px -10px 20px rgba(17, 17, 17, 0.18);
   backface-visibility: visible;
 }
 
@@ -443,7 +442,10 @@ main {
   animation-delay: -2s;
 }
 
-.shape-cube span { border-radius: 20px; }
+.shape-cube span {
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+}
 
 .shape-cuboid {
   width: 150px;
@@ -454,7 +456,10 @@ main {
   animation-delay: -6s;
 }
 
-.shape-cuboid span { border-radius: 22px; }
+.shape-cuboid span {
+  border-radius: 22px;
+  background: linear-gradient(135deg, #4ecdc4, #44b8ae);
+}
 
 .shape-cone {
   width: 96px;
@@ -468,7 +473,7 @@ main {
 .shape-cone span {
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
   border-radius: 38% 38% 28% 28%;
-  background: linear-gradient(135deg, rgba(204, 255, 0, 0.7), rgba(204, 255, 0, 0.14));
+  background: linear-gradient(135deg, #ccff00, #a8d900);
 }
 
 .shape-sphere {
@@ -483,7 +488,7 @@ main {
 
 .shape-sphere span {
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 25%, #ffffff, #dce0d2 48%, #adb2a4 100%);
+  background: radial-gradient(circle at 30% 25%, #ffe66d, #ffb347 55%, #ff8c42);
 }
 
 .shape-cylinder {
@@ -497,7 +502,7 @@ main {
 
 .shape-cylinder span {
   border-radius: 38px;
-  background: linear-gradient(90deg, rgba(160, 170, 166, 0.42), rgba(255, 255, 255, 0.75), rgba(160, 170, 166, 0.35));
+  background: linear-gradient(90deg, #6c5ce7, #a29bfe 50%, #6c5ce7);
 }
 
 .shape-torus {
@@ -513,10 +518,10 @@ main {
 .shape-torus span {
   width: 68%;
   height: 68%;
-  border: 16px solid rgba(17, 17, 17, 0.13);
+  border: 16px solid #fd79a8;
   border-radius: 50%;
   background: transparent;
-  box-shadow: inset 5px 5px 10px rgba(255, 255, 255, 0.8), inset -5px -5px 10px rgba(17, 17, 17, 0.1);
+  box-shadow: inset 5px 5px 10px rgba(255, 255, 255, 0.3), inset -5px -5px 10px rgba(17, 17, 17, 0.15);
 }
 
 .shape-prism {
@@ -531,7 +536,7 @@ main {
 .shape-prism span {
   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
   border-radius: 18px;
-  background: linear-gradient(135deg, rgba(183, 198, 255, 0.66), rgba(107, 130, 214, 0.18));
+  background: linear-gradient(135deg, #00b894, #00cec9);
 }
 
 @keyframes shapeFloat {
