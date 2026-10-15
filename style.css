@@ -333,44 +333,6 @@ main {
   100% { background-position: 32px 0, 32px 4px, 36px -4px, 28px 0px; }
 }
 
-/* Nodes Section */
-.nodes-section {
-  padding: 4rem 0;
-}
-
-.nodes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.node-card {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 8px;
-  transition: all 0.3s;
-}
-
-.node-card:hover {
-  border-color: var(--text-main);
-  background: rgba(255,255,255,0.02);
-}
-
-.node-icon {
-  width: 50px; height: 50px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--text-main);
-}
-
-.node-info h3 { font-size: 1.2rem; }
-.node-info p { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
-
 /* Competencies Section */
 .competencies-section {
   padding: 8rem 0 12rem;
