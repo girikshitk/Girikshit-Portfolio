@@ -95,6 +95,57 @@ a {
   color: var(--cyber-lime);
 }
 
+/* Accurate LinkedIn Button */
+.linkedin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-main);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.linkedin-btn .linkedin-icon {
+  width: 16px;
+  height: 16px;
+  color: #0A66C2; /* Official LinkedIn Blue */
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.linkedin-btn .external-arrow {
+  width: 14px;
+  height: 14px;
+  opacity: 0.6;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.linkedin-btn:hover {
+  background: rgba(10, 102, 194, 0.2);
+  border-color: #0A66C2;
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(10, 102, 194, 0.4);
+  transform: translateY(-1px);
+}
+
+.linkedin-btn:hover .linkedin-icon {
+  transform: scale(1.15);
+}
+
+.linkedin-btn:hover .external-arrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
 /* Global Nav */
 .global-nav {
   position: fixed;
@@ -234,12 +285,121 @@ main {
   color: var(--text-muted);
 }
 
+/* Card Actions (Like & View buttons) */
+.card-actions {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+  pointer-events: auto;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: rgba(18, 18, 18, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background: rgba(30, 30, 30, 0.95);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Like Button */
+.like-btn {
+  color: var(--text-muted);
+}
+
+.like-btn .heart-icon {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), fill 0.3s ease, stroke 0.3s ease;
+}
+
+.like-btn:hover {
+  color: var(--text-main);
+  border-color: rgba(255, 51, 102, 0.45);
+}
+
+.like-btn:hover .heart-icon {
+  stroke: #FF3366;
+  transform: scale(1.15);
+}
+
+.like-btn.liked {
+  color: #FFFFFF;
+  background: rgba(255, 51, 102, 0.18);
+  border-color: #FF3366;
+  box-shadow: 0 0 16px rgba(255, 51, 102, 0.35);
+}
+
+.like-btn.liked .heart-icon {
+  fill: #FF3366;
+  stroke: #FF3366;
+  animation: heartPulse 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.like-btn .like-count {
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+@keyframes heartPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+/* View Button */
+.view-btn {
+  background: rgba(204, 255, 0, 0.08);
+  border-color: rgba(204, 255, 0, 0.3);
+  color: var(--cyber-lime);
+}
+
+.view-btn i, .view-btn svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.25s ease;
+}
+
+.view-btn:hover {
+  background: var(--cyber-lime);
+  border-color: var(--cyber-lime);
+  color: #000000;
+  box-shadow: 0 0 20px var(--cyber-lime-glow);
+}
+
+.view-btn:hover i, .view-btn:hover svg {
+  transform: translate(2px, -2px);
+}
+
 /* Gaurdian Card specific */
 #card-gaurdian .terminal-overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0, 0, 0, 0.95);
-  padding: 1rem;
+  padding: 1rem 1rem 4.5rem;
   font-family: var(--font-mono);
   font-size: 0.8rem;
   opacity: 0;
@@ -247,6 +407,7 @@ main {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+  pointer-events: none;
 }
 
 #card-gaurdian:hover .terminal-overlay {
@@ -318,6 +479,7 @@ main {
   background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
   border-radius: 4px;
   transition: all 0.2s steps(4);
+  pointer-events: none;
 }
 
 #card-pixelgame:hover .pixel-sprite {

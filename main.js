@@ -272,3 +272,82 @@ new Chart(ctxChart, {
     }
   }
 });
+
+
+// --- PROJECT SOCIAL LIKES & INTERACTIVE NAVIGATION ---
+const defaultLikeCounts = {
+  gaurdian: 248,
+  valueline: 189,
+  pixelgame: 164
+};
+
+function initProjectLikes() {
+  const likeButtons = document.querySelectorAll('.like-btn');
+  likeButtons.forEach(btn => {
+    const projectId = btn.dataset.project;
+    if (!projectId) return;
+
+    const countKey = `portfolio_likes_${projectId}`;
+    const likedKey = `portfolio_user_liked_${projectId}`;
+
+    // Read stored count or fallback to baseline
+    let count = parseInt(localStorage.getItem(countKey), 10);
+    if (isNaN(count)) {
+      count = defaultLikeCounts[projectId] || 100;
+      localStorage.setItem(countKey, count);
+    }
+
+    const isLiked = localStorage.getItem(likedKey) === 'true';
+    if (isLiked) {
+      btn.classList.add('liked');
+    }
+
+    const countEl = btn.querySelector('.like-count');
+    if (countEl) {
+      countEl.textContent = count;
+    }
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const currentlyLiked = btn.classList.contains('liked');
+      let currentCount = parseInt(localStorage.getItem(countKey), 10);
+      if (isNaN(currentCount)) currentCount = count;
+
+      if (currentlyLiked) {
+        btn.classList.remove('liked');
+        currentCount = Math.max(0, currentCount - 1);
+        localStorage.setItem(likedKey, 'false');
+      } else {
+        btn.classList.add('liked');
+        currentCount += 1;
+        localStorage.setItem(likedKey, 'true');
+      }
+
+      localStorage.setItem(countKey, currentCount);
+      if (countEl) {
+        countEl.textContent = currentCount;
+      }
+    });
+  });
+
+  // Card background click to open URL (excluding like button)
+  const cards = document.querySelectorAll('.project-card');
+  cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.like-btn')) return;
+      if (e.target.closest('.view-btn')) return; // Handled by <a> tag natively
+      const url = card.dataset.url;
+      if (url) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      }
+    });
+  });
+}
+
+initProjectLikes();
+
+if (typeof window.lucide !== 'undefined') {
+  window.lucide.createIcons();
+}

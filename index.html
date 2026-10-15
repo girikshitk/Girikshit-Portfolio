@@ -18,8 +18,12 @@
     <header class="global-header">
       <a href="#" class="brand">GIRIKSHIT</a>
       <div class="header-right">
-        <a href="https://www.linkedin.com/in/girikshit-kumar-2129ba27b/" target="_blank" class="neural-link interactive" aria-label="LinkedIn">
-            <i data-lucide="brain-circuit"></i>
+        <a href="https://www.linkedin.com/in/girikshit-kumar-2129ba27b/" target="_blank" rel="noopener noreferrer" class="linkedin-btn interactive" aria-label="LinkedIn Profile">
+          <svg class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+          </svg>
+          <span>LinkedIn</span>
+          <i data-lucide="arrow-up-right" class="external-arrow"></i>
         </a>
       </div>
     </header>
@@ -54,7 +58,7 @@
         <div class="project-grid">
           
           <!-- Gaurdian Card -->
-          <a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" class="project-card interactive" id="card-gaurdian">
+          <div class="project-card interactive" id="card-gaurdian" data-url="https://girikshitk.github.io/Gaurdian-Web/">
             <div class="card-bg"></div>
             <div class="card-content">
               <h3>Gaurdian</h3>
@@ -71,10 +75,22 @@
                 <!-- Log injected via JS -->
               </div>
             </div>
-          </a>
+            <div class="card-actions">
+              <button type="button" class="action-btn like-btn interactive" data-project="gaurdian" aria-label="Like Gaurdian">
+                <svg class="heart-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                </svg>
+                <span class="like-count">248</span>
+              </button>
+              <a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" rel="noopener noreferrer" class="action-btn view-btn interactive">
+                <span>View</span>
+                <i data-lucide="arrow-up-right"></i>
+              </a>
+            </div>
+          </div>
 
           <!-- Valueline Card -->
-          <a href="https://valueline-3d-viewer.netlify.app/" target="_blank" class="project-card interactive card-3d" id="card-valueline">
+          <div class="project-card interactive card-3d" id="card-valueline" data-url="https://valueline-3d-viewer.netlify.app/">
              <div class="card-content">
               <h3>Valueline</h3>
               <p>3D Experience</p>
@@ -90,16 +106,40 @@
                 <div class="face bottom"></div>
               </div>
             </div>
-          </a>
+            <div class="card-actions">
+              <button type="button" class="action-btn like-btn interactive" data-project="valueline" aria-label="Like Valueline">
+                <svg class="heart-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                </svg>
+                <span class="like-count">189</span>
+              </button>
+              <a href="https://valueline-3d-viewer.netlify.app/" target="_blank" rel="noopener noreferrer" class="action-btn view-btn interactive">
+                <span>View</span>
+                <i data-lucide="arrow-up-right"></i>
+              </a>
+            </div>
+          </div>
 
           <!-- 2D Pixel Art Game Card -->
-          <a href="https://www.behance.net/gallery/228367639/My-First-Game-Design-Project" target="_blank" class="project-card interactive" id="card-pixelgame">
+          <div class="project-card interactive" id="card-pixelgame" data-url="https://www.behance.net/gallery/228367639/My-First-Game-Design-Project">
             <div class="card-content">
                <h3>Visual Craft</h3>
                <p>2D Pixel Art Game</p>
             </div>
             <div class="pixel-sprite"></div>
-          </a>
+            <div class="card-actions">
+              <button type="button" class="action-btn like-btn interactive" data-project="pixelgame" aria-label="Like Visual Craft">
+                <svg class="heart-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                </svg>
+                <span class="like-count">164</span>
+              </button>
+              <a href="https://www.behance.net/gallery/228367639/My-First-Game-Design-Project" target="_blank" rel="noopener noreferrer" class="action-btn view-btn interactive">
+                <span>View</span>
+                <i data-lucide="arrow-up-right"></i>
+              </a>
+            </div>
+          </div>
 
         </div>
       </section>
