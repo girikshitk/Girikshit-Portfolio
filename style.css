@@ -393,8 +393,9 @@ main {
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
   perspective: 1000px;
+  transition: opacity 0.4s ease;
 }
 
 .shape {
@@ -402,8 +403,9 @@ main {
   display: grid;
   place-items: center;
   transform-style: preserve-3d;
-  filter: drop-shadow(0 22px 20px rgba(17, 17, 17, 0.11));
+  filter: drop-shadow(0 22px 20px rgba(17, 17, 17, 0.16));
   animation: shapeFloat 12s ease-in-out infinite;
+  opacity: 0.92;
 }
 
 .shape span {
@@ -522,6 +524,8 @@ main {
 }
 
 .hero-content {
+  position: relative;
+  z-index: 2;
   max-width: 820px;
   display: flex;
   flex-direction: column;
@@ -1139,7 +1143,7 @@ main {
   }
 
   .hero-scene {
-    opacity: 0.72;
+    opacity: 0.84;
   }
 
   .shape-cube { left: -4%; top: 20%; transform: scale(0.7) rotateX(56deg) rotateY(-35deg) rotateZ(18deg); }

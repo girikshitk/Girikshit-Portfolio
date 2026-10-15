@@ -108,6 +108,27 @@ window.addEventListener('scroll', requestImageResize, { passive: true });
 window.addEventListener('resize', requestImageResize, { passive: true });
 requestImageResize();
 
+// --- HERO OBJECT DEPTH ON SCROLL ---
+const hero = document.querySelector('.hero');
+const heroScene = document.querySelector('.hero-scene');
+let heroDepthFrame = 0;
+
+function updateHeroDepth() {
+  const heroProgress = Math.min(1, Math.max(0, window.scrollY / Math.max(1, hero.offsetHeight)));
+  heroScene.style.transform = `translateY(${heroProgress * -36}px) scale(${1 - heroProgress * 0.18})`;
+  heroScene.style.opacity = `${0.92 - heroProgress * 0.2}`;
+  heroDepthFrame = 0;
+}
+
+function requestHeroDepth() {
+  if (heroDepthFrame) return;
+  heroDepthFrame = window.requestAnimationFrame(updateHeroDepth);
+}
+
+window.addEventListener('scroll', requestHeroDepth, { passive: true });
+window.addEventListener('resize', requestHeroDepth, { passive: true });
+requestHeroDepth();
+
 // --- VALUELINE 3D CUBE INTERACTION ---
 const valuelineCard = document.getElementById('card-valueline');
 const cubeContainer = valuelineCard.querySelector('.cube-container');
