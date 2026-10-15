@@ -27,14 +27,14 @@ if (finePointer) {
 
   document.addEventListener('pointerover', (event) => {
     const target = event.target;
-    if (target instanceof Element && target.closest('a, button, .project')) {
+    if (target instanceof Element && target.closest('a, button, .project, .shape')) {
       cursor.classList.add('is-hovering');
     }
   });
 
   document.addEventListener('pointerout', (event) => {
     const target = event.target;
-    if (target instanceof Element && target.closest('a, button, .project')) {
+    if (target instanceof Element && target.closest('a, button, .project, .shape')) {
       cursor.classList.remove('is-hovering');
     }
   });
@@ -128,6 +128,170 @@ function requestHeroDepth() {
 window.addEventListener('scroll', requestHeroDepth, { passive: true });
 window.addEventListener('resize', requestHeroDepth, { passive: true });
 requestHeroDepth();
+
+// --- HERO OBJECT PHYSICS ---
+const physicsShapes = [...document.querySelectorAll('.hero-scene .shape')].map((element) => {
+  const sceneRect = heroScene.getBoundingClientRect();
+  const rect = element.getBoundingClientRect();
+  const state = {
+    element,
+    x: rect.left - sceneRect.left,
+    y: rect.top - sceneRect.top,
+    width: rect.width,
+    height: rect.height,
+    vx: 0,
+    vy: 0,
+    dragging: false,
+    offsetX: 0,
+    offsetY: 0,
+    lastX: 0,
+    lastY: 0
+  };
+
+  element.style.left = `${state.x}px`;
+  element.style.top = `${state.y}px`;
+  element.style.right = 'auto';
+  element.style.bottom = 'auto';
+  return state;
+});
+
+function keepShapeInBounds(state) {
+  const maxX = Math.max(0, heroScene.clientWidth - state.width);
+  const maxY = Math.max(0, heroScene.clientHeight - state.height);
+
+  if (state.x < 0) {
+    state.x = 0;
+    state.vx = Math.abs(state.vx) * 0.68;
+  } else if (state.x > maxX) {
+    state.x = maxX;
+    state.vx = -Math.abs(state.vx) * 0.68;
+  }
+
+  if (state.y < 0) {
+    state.y = 0;
+    state.vy = Math.abs(state.vy) * 0.68;
+  } else if (state.y > maxY) {
+    state.y = maxY;
+    state.vy = -Math.abs(state.vy) * 0.62;
+    state.vx *= 0.92;
+    if (Math.abs(state.vy) < 0.45) state.vy = 0;
+  }
+}
+
+function resolveShapeCollisions() {
+  for (let index = 0; index < physicsShapes.length; index += 1) {
+    for (let otherIndex = index + 1; otherIndex < physicsShapes.length; otherIndex += 1) {
+      const first = physicsShapes[index];
+      const second = physicsShapes[otherIndex];
+      const firstCenterX = first.x + first.width / 2;
+      const firstCenterY = first.y + first.height / 2;
+      const secondCenterX = second.x + second.width / 2;
+      const secondCenterY = second.y + second.height / 2;
+      const deltaX = secondCenterX - firstCenterX;
+      const deltaY = secondCenterY - firstCenterY;
+      const distance = Math.hypot(deltaX, deltaY) || 0.001;
+      const minimumDistance = Math.min(first.width, first.height, second.width, second.height) * 0.58;
+
+      if (distance >= minimumDistance) continue;
+
+      const overlap = (minimumDistance - distance) / 2;
+      const normalX = deltaX / distance;
+      const normalY = deltaY / distance;
+
+      if (!first.dragging) {
+        first.x -= normalX * overlap;
+        first.y -= normalY * overlap;
+      }
+      if (!second.dragging) {
+        second.x += normalX * overlap;
+        second.y += normalY * overlap;
+      }
+
+      const relativeVelocity = (second.vx - first.vx) * normalX + (second.vy - first.vy) * normalY;
+      if (relativeVelocity >= 0) continue;
+
+      const impulse = -relativeVelocity * 0.55;
+      if (!first.dragging) {
+        first.vx -= normalX * impulse;
+        first.vy -= normalY * impulse;
+      }
+      if (!second.dragging) {
+        second.vx += normalX * impulse;
+        second.vy += normalY * impulse;
+      }
+    }
+  }
+}
+
+function updatePhysics() {
+  physicsShapes.forEach((state) => {
+    if (!state.dragging) {
+      state.vy += 0.16;
+      state.vx *= 0.995;
+      state.vy *= 0.995;
+      state.x += state.vx;
+      state.y += state.vy;
+    }
+  });
+
+  resolveShapeCollisions();
+
+  physicsShapes.forEach((state) => {
+    keepShapeInBounds(state);
+    state.element.style.left = `${state.x}px`;
+    state.element.style.top = `${state.y}px`;
+  });
+
+  window.requestAnimationFrame(updatePhysics);
+}
+
+physicsShapes.forEach((state) => {
+  state.element.addEventListener('pointerdown', (event) => {
+    event.preventDefault();
+    state.dragging = true;
+    state.vx = 0;
+    state.vy = 0;
+    const sceneRect = heroScene.getBoundingClientRect();
+    state.offsetX = event.clientX - sceneRect.left - state.x;
+    state.offsetY = event.clientY - sceneRect.top - state.y;
+    state.lastX = state.x;
+    state.lastY = state.y;
+    state.element.classList.add('is-dragging');
+  });
+});
+
+window.addEventListener('pointermove', (event) => {
+  const state = physicsShapes.find((shape) => shape.dragging);
+  if (!state) return;
+
+  const sceneRect = heroScene.getBoundingClientRect();
+  const nextX = event.clientX - sceneRect.left - state.offsetX;
+  const nextY = event.clientY - sceneRect.top - state.offsetY;
+  state.vx = nextX - state.lastX;
+  state.vy = nextY - state.lastY;
+  state.x = nextX;
+  state.y = nextY;
+  state.lastX = nextX;
+  state.lastY = nextY;
+}, { passive: false });
+
+window.addEventListener('pointerup', () => {
+  physicsShapes.forEach((state) => {
+    if (!state.dragging) return;
+    state.dragging = false;
+    state.element.classList.remove('is-dragging');
+  });
+});
+
+window.addEventListener('resize', () => {
+  physicsShapes.forEach((state) => {
+    state.width = state.element.getBoundingClientRect().width;
+    state.height = state.element.getBoundingClientRect().height;
+    keepShapeInBounds(state);
+  });
+});
+
+window.requestAnimationFrame(updatePhysics);
 
 // --- VALUELINE 3D CUBE INTERACTION ---
 const valuelineCard = document.getElementById('card-valueline');

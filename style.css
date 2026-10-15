@@ -406,6 +406,22 @@ main {
   filter: drop-shadow(0 22px 20px rgba(17, 17, 17, 0.16));
   animation: shapeFloat 12s ease-in-out infinite;
   opacity: 0.92;
+  pointer-events: auto;
+  user-select: none;
+  touch-action: none;
+  cursor: grab;
+  will-change: left, top;
+}
+
+.shape.is-dragging {
+  cursor: grabbing;
+  filter: drop-shadow(0 30px 28px rgba(17, 17, 17, 0.22));
+  z-index: 4;
+}
+
+.shape.is-dragging span {
+  border-color: rgba(17, 17, 17, 0.35);
+  box-shadow: inset 8px 8px 18px rgba(255, 255, 255, 0.9), inset -10px -12px 24px rgba(17, 17, 17, 0.12), 0 0 0 8px rgba(204, 255, 0, 0.08);
 }
 
 .shape span {
