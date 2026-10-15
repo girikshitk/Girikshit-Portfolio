@@ -89,18 +89,53 @@
               <span class="trip-project-status">Featured concept</span>
               <strong>Weekend Trip</strong>
               <span>Plan together · Spend clearly</span>
+              <span class="trip-gallery-hint">Hover to pause · Click to explore</span>
             </div>
-            <div class="trip-preview-grid">
-              <img src="/upcoming-projects/Build_App_from_Data_(2).png" alt="Trip planner upload itinerary screen" loading="lazy" />
-              <img src="/upcoming-projects/Build_App_from_Data_(1).png" alt="Trip planner itinerary screen" loading="lazy" />
-              <img src="/upcoming-projects/Build_App_from_2Data.png" alt="Trip planner settlements screen" loading="lazy" />
-              <img src="/upcoming-projects/Build_App_from_Data-1.png" alt="Trip planner profile screen" loading="lazy" />
-              <img src="/upcoming-projects/Build_App_from_Data.png" alt="Trip planner overview screen" loading="lazy" />
-              <img src="/upcoming-projects/Build_App_from_Data_(3).png" alt="Trip planner additional screen" loading="lazy" />
-              <img src="/upcoming-projects/Build_App_from_Data_(4).png" alt="Trip planner additional screen" loading="lazy" />
-              <img src="/upcoming-projects/Build_App_from_Data_(5).png" alt="Trip planner additional screen" loading="lazy" />
-              <img src="/upcoming-projects/Build_App_from_Data_(6).png" alt="Trip planner additional screen" loading="lazy" />
-              <img src="/upcoming-projects/Build_App_from_Data_(7).png" alt="Trip planner additional screen" loading="lazy" />
+            <div class="trip-gallery" aria-label="Weekend Trip screens">
+              <div class="trip-gallery-track">
+                <button class="trip-gallery-item" type="button" data-gallery-index="0" aria-label="Open trip planner upload itinerary screen">
+                  <img src="/upcoming-projects/Build_App_from_Data_(2).png" alt="Trip planner upload itinerary screen" loading="lazy" />
+                </button>
+                <button class="trip-gallery-item" type="button" data-gallery-index="1" aria-label="Open trip planner itinerary screen">
+                  <img src="/upcoming-projects/Build_App_from_Data_(1).png" alt="Trip planner itinerary screen" loading="lazy" />
+                </button>
+                <button class="trip-gallery-item" type="button" data-gallery-index="2" aria-label="Open trip planner settlements screen">
+                  <img src="/upcoming-projects/Build_App_from_2Data.png" alt="Trip planner settlements screen" loading="lazy" />
+                </button>
+                <button class="trip-gallery-item" type="button" data-gallery-index="3" aria-label="Open trip planner profile screen">
+                  <img src="/upcoming-projects/Build_App_from_Data-1.png" alt="Trip planner profile screen" loading="lazy" />
+                </button>
+                <button class="trip-gallery-item" type="button" data-gallery-index="4" aria-label="Open trip planner overview screen">
+                  <img src="/upcoming-projects/Build_App_from_Data.png" alt="Trip planner overview screen" loading="lazy" />
+                </button>
+                <button class="trip-gallery-item" type="button" data-gallery-index="5" aria-label="Open trip planner planning screen">
+                  <img src="/upcoming-projects/Build_App_from_Data_(3).png" alt="Trip planner planning screen" loading="lazy" />
+                </button>
+                <button class="trip-gallery-item" type="button" data-gallery-index="6" aria-label="Open trip planner details screen">
+                  <img src="/upcoming-projects/Build_App_from_Data_(4).png" alt="Trip planner details screen" loading="lazy" />
+                </button>
+                <button class="trip-gallery-item" type="button" data-gallery-index="7" aria-label="Open trip planner expenses screen">
+                  <img src="/upcoming-projects/Build_App_from_Data_(5).png" alt="Trip planner expenses screen" loading="lazy" />
+                </button>
+                <button class="trip-gallery-item" type="button" data-gallery-index="8" aria-label="Open trip planner sharing screen">
+                  <img src="/upcoming-projects/Build_App_from_Data_(6).png" alt="Trip planner sharing screen" loading="lazy" />
+                </button>
+                <button class="trip-gallery-item" type="button" data-gallery-index="9" aria-label="Open trip planner final screen">
+                  <img src="/upcoming-projects/Build_App_from_Data_(7).png" alt="Trip planner final screen" loading="lazy" />
+                </button>
+                <div class="trip-gallery-set" aria-hidden="true">
+                  <button class="trip-gallery-item" type="button" tabindex="-1"><img src="/upcoming-projects/Build_App_from_Data_(2).png" alt="" loading="lazy" /></button>
+                  <button class="trip-gallery-item" type="button" tabindex="-1"><img src="/upcoming-projects/Build_App_from_Data_(1).png" alt="" loading="lazy" /></button>
+                  <button class="trip-gallery-item" type="button" tabindex="-1"><img src="/upcoming-projects/Build_App_from_2Data.png" alt="" loading="lazy" /></button>
+                  <button class="trip-gallery-item" type="button" tabindex="-1"><img src="/upcoming-projects/Build_App_from_Data-1.png" alt="" loading="lazy" /></button>
+                  <button class="trip-gallery-item" type="button" tabindex="-1"><img src="/upcoming-projects/Build_App_from_Data.png" alt="" loading="lazy" /></button>
+                  <button class="trip-gallery-item" type="button" tabindex="-1"><img src="/upcoming-projects/Build_App_from_Data_(3).png" alt="" loading="lazy" /></button>
+                  <button class="trip-gallery-item" type="button" tabindex="-1"><img src="/upcoming-projects/Build_App_from_Data_(4).png" alt="" loading="lazy" /></button>
+                  <button class="trip-gallery-item" type="button" tabindex="-1"><img src="/upcoming-projects/Build_App_from_Data_(5).png" alt="" loading="lazy" /></button>
+                  <button class="trip-gallery-item" type="button" tabindex="-1"><img src="/upcoming-projects/Build_App_from_Data_(6).png" alt="" loading="lazy" /></button>
+                  <button class="trip-gallery-item" type="button" tabindex="-1"><img src="/upcoming-projects/Build_App_from_Data_(7).png" alt="" loading="lazy" /></button>
+                </div>
+              </div>
             </div>
           </div>
           <div class="project-info">
@@ -358,6 +393,23 @@
         <span>Girikshit Kumar</span>
         <span class="footer-meta">Product Designer &amp; AI Engineer</span>
       </footer>
+
+      <div class="gallery-modal" id="galleryModal" hidden>
+        <div class="gallery-modal-backdrop" data-gallery-close></div>
+        <section class="gallery-modal-panel" role="dialog" aria-modal="true" aria-labelledby="galleryModalTitle">
+          <button class="gallery-modal-close" type="button" data-gallery-close aria-label="Close image viewer">×</button>
+          <div class="gallery-modal-image-wrap">
+            <img id="galleryModalImage" src="" alt="" />
+          </div>
+          <div class="gallery-modal-caption">
+            <div>
+              <span class="gallery-modal-kicker">Weekend Trip · Screen detail</span>
+              <h2 id="galleryModalTitle">Trip planner screen</h2>
+            </div>
+            <span class="gallery-modal-count" id="galleryModalCount">01 / 10</span>
+          </div>
+        </section>
+      </div>
 
     </main>
 

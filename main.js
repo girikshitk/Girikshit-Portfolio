@@ -101,7 +101,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 revealTargets.forEach(el => revealObserver.observe(el));
 
 // --- SCROLL-DRIVEN PROJECT IMAGE COMPRESSION ---
-const projectImages = document.querySelectorAll('.project-image');
+const projectImages = document.querySelectorAll('.project-image:not(.trip-project-image)');
 let imageResizeFrame = 0;
 
 function updateProjectImageHeights() {
@@ -555,4 +555,43 @@ function initProjectLikes() {
   });
 }
 
+function initTripGallery() {
+  const modal = document.getElementById('galleryModal');
+  const modalImage = document.getElementById('galleryModalImage');
+  const modalTitle = document.getElementById('galleryModalTitle');
+  const modalCount = document.getElementById('galleryModalCount');
+  const galleryItems = [...document.querySelectorAll('.trip-gallery-item[data-gallery-index]')];
+  const closeButtons = document.querySelectorAll('[data-gallery-close]');
+  if (!modal || !modalImage || !modalTitle || !modalCount || galleryItems.length === 0) return;
+
+  const openGalleryItem = (item) => {
+    const image = item.querySelector('img');
+    const index = Number(item.dataset.galleryIndex);
+    if (!image || Number.isNaN(index)) return;
+
+    modalImage.src = image.currentSrc || image.src;
+    modalImage.alt = image.alt;
+    modalTitle.textContent = image.alt.replace(/^Trip planner /i, '').replace(/ screen$/i, '') + ' screen';
+    modalCount.textContent = `${String(index + 1).padStart(2, '0')} / ${String(galleryItems.length).padStart(2, '0')}`;
+    modal.hidden = false;
+    document.body.classList.add('gallery-open');
+    modal.querySelector('.gallery-modal-close')?.focus();
+  };
+
+  const closeGallery = () => {
+    modal.hidden = true;
+    modalImage.src = '';
+    document.body.classList.remove('gallery-open');
+  };
+
+  galleryItems.forEach((item) => {
+    item.addEventListener('click', () => openGalleryItem(item));
+  });
+  closeButtons.forEach((button) => button.addEventListener('click', closeGallery));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !modal.hidden) closeGallery();
+  });
+}
+
+initTripGallery();
 initProjectLikes();
