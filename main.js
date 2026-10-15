@@ -1,111 +1,28 @@
-import './style.css'
+import './style.css';
 import Chart from 'chart.js/auto';
 
-// --- NEURAL TRAIL CURSOR ---
-const canvas = document.getElementById('neural-trail');
-const ctx = canvas.getContext('2d');
-let width, height;
-let particles = [];
-let mouse = { x: null, y: null };
-let isHoveringInteractive = false;
-let targetElement = null;
-
-function resizeCanvas() {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-class Particle {
-  constructor(x, y, isSnap) {
-    this.x = x;
-    this.y = y;
-    this.size = Math.random() * 2 + 1;
-    this.speedX = (Math.random() - 0.5) * 1.5;
-    this.speedY = (Math.random() - 0.5) * 1.5;
-    this.life = 1;
-    this.decay = Math.random() * 0.05 + 0.02;
-    this.isSnap = isSnap;
+// --- STICKY NAV SCROLL EFFECT ---
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
   }
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    this.life -= this.decay;
-  }
-  draw() {
-    ctx.globalAlpha = this.life;
-    ctx.fillStyle = this.isSnap ? '#CCFF00' : '#888';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.globalAlpha = 1;
-  }
-}
+}, { passive: true });
 
-window.addEventListener('mousemove', (e) => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-
-  // Add particles on move
-  particles.push(new Particle(mouse.x, mouse.y, isHoveringInteractive));
-});
-
-// Detect hover on interactive elements to 'snap' or glow
-const interactives = document.querySelectorAll('.interactive');
-interactives.forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    isHoveringInteractive = true;
-    targetElement = el.getBoundingClientRect();
-  });
-  el.addEventListener('mouseleave', () => {
-    isHoveringInteractive = false;
-    targetElement = null;
-  });
-});
-
-function animateCursor() {
-  ctx.clearRect(0, 0, width, height);
-
-  // Draw custom cursor trail
-  for(let i = 0; i < particles.length; i++) {
-    particles[i].update();
-    particles[i].draw();
-    if (particles[i].life <= 0) {
-      particles.splice(i, 1);
-      i--;
+// --- SCROLL REVEAL ---
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
     }
-  }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 
-  // Draw snap ring if hovering
-  if (isHoveringInteractive && targetElement) {
-    const cx = targetElement.left + targetElement.width / 2;
-    const cy = targetElement.top + targetElement.height / 2;
-    ctx.strokeStyle = 'rgba(204, 255, 0, 0.5)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    // Smooth transition towards center could be added here
-    ctx.arc(mouse.x, mouse.y, 25, 0, Math.PI * 2);
-    ctx.stroke();
-
-    // Draw connection lines between mouse and bounding box center
-    ctx.beginPath();
-    ctx.moveTo(mouse.x, mouse.y);
-    ctx.lineTo(cx, cy);
-    ctx.strokeStyle = 'rgba(204, 255, 0, 0.2)';
-    ctx.stroke();
-  } else if (mouse.x) {
-    // Normal cursor ring
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
-    ctx.beginPath();
-    ctx.arc(mouse.x, mouse.y, 10, 0, Math.PI * 2);
-    ctx.stroke();
-  }
-
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
-
+revealEls.forEach(el => revealObserver.observe(el));
 
 // --- VALUELINE 3D INTERACTIVE ROTATE & REVOLVE ---
 const valuelineCard = document.getElementById('card-valueline');
@@ -136,30 +53,25 @@ valuelineCard.addEventListener('mousemove', (e) => {
   lastX = e.clientX;
   lastY = e.clientY;
 
-  // Only rotate and revolve when the cursor is physically moving
   if (deltaX === 0 && deltaY === 0) return;
 
   const moveDist = Math.hypot(deltaX, deltaY);
 
-  // 1. Rotate the cube on its axes as cursor moves
   cubeAngleY += deltaX * 0.6;
   cubeAngleX -= deltaY * 0.6;
   cube.style.transform = `rotateX(${cubeAngleX}deg) rotateY(${cubeAngleY}deg)`;
 
-  // 2. Revolve the cube around the card's center
   const rect = valuelineCard.getBoundingClientRect();
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
   const centerX = rect.width / 2;
   const centerY = rect.height / 2;
 
-  // Orbital revolution around center advances with cursor movement
   revolveAngle += moveDist * 0.02;
   const orbitRadius = 24;
   const orbitX = Math.cos(revolveAngle) * orbitRadius + ((x - centerX) / centerX) * 15;
   const orbitY = Math.sin(revolveAngle) * (orbitRadius * 0.6) + ((y - centerY) / centerY) * 15;
 
-  // 3D perspective tilt
   const tiltX = ((y - centerY) / centerY) * -15;
   const tiltY = ((x - centerX) / centerX) * 15;
 
@@ -172,7 +84,6 @@ valuelineCard.addEventListener('mouseleave', () => {
   cubeContainer.style.transition = 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
   cubeContainer.style.transform = 'translate(-50%, -50%) rotateX(0deg) rotateY(0deg)';
 });
-
 
 // --- GAURDIAN TERMINAL SIMULATION ---
 const terminalBody = document.getElementById('gaurdian-terminal');
@@ -212,10 +123,8 @@ gaurdianCard.addEventListener('mouseleave', () => {
   clearInterval(terminalInterval);
 });
 
-
 // --- TECHNICAL COMPETENCIES RADAR CHART ---
 const ctxChart = document.getElementById('competencyChart').getContext('2d');
-// Global defaults for Chart.js
 Chart.defaults.font.family = "'JetBrains Mono', monospace";
 Chart.defaults.color = '#888';
 
@@ -223,18 +132,18 @@ new Chart(ctxChart, {
   type: 'radar',
   data: {
     labels: [
-      'UI/UX Design', 
-      'Service Design', 
-      'Python/AI Triage', 
-      'Front-end (Vibe Coding)', 
-      '3D/Blender', 
+      'UI/UX Design',
+      'Service Design',
+      'Python/AI Triage',
+      'Front-end (Vibe Coding)',
+      '3D/Blender',
       'Behavioral Psych',
       'Systems Thinking'
     ],
     datasets: [{
       label: 'Skill Proficiency',
       data: [90, 85, 75, 85, 90, 85, 90],
-      backgroundColor: 'rgba(204, 255, 0, 0.2)', // Cyber Lime transparent
+      backgroundColor: 'rgba(204, 255, 0, 0.15)',
       borderColor: '#CCFF00',
       pointBackgroundColor: '#CCFF00',
       pointBorderColor: '#000',
@@ -246,14 +155,14 @@ new Chart(ctxChart, {
   options: {
     scales: {
       r: {
-        angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+        angleLines: { color: 'rgba(255, 255, 255, 0.08)' },
+        grid: { color: 'rgba(255, 255, 255, 0.08)' },
         pointLabels: {
-          color: '#ccc',
-          font: { size: 12 }
+          color: '#A1A1AA',
+          font: { size: 11 }
         },
         ticks: {
-          display: false, // Hide numeric scales for cleaner aesthetic
+          display: false,
           min: 0,
           max: 100,
           stepSize: 20
@@ -263,7 +172,7 @@ new Chart(ctxChart, {
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: '#111',
+        backgroundColor: '#131316',
         titleFont: { family: "'JetBrains Mono', monospace" },
         bodyFont: { family: "'JetBrains Mono', monospace" },
         borderColor: 'rgba(255,255,255,0.1)',
@@ -273,9 +182,7 @@ new Chart(ctxChart, {
   }
 });
 
-
 // --- PROJECT SOCIAL LIKES & GOOGLE SHEET BACKEND ---
-// Connected to user's Google Sheet Web App:
 const GOOGLE_SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbwYvLGB-mOJtvm5Ed2Zxi8PjR2EWzoCe_6lLYJOJYTBxAEO9SPWrg_Y54n55_ejdvunxg/exec';
 
 const defaultLikeCounts = {
@@ -326,7 +233,6 @@ function initProjectLikes() {
     const countKey = `portfolio_v2_likes_${projectId}`;
     const likedKey = `portfolio_v2_liked_${projectId}`;
 
-    // Read stored count or fallback to baseline
     let count = parseInt(localStorage.getItem(countKey), 10);
     if (isNaN(count)) {
       count = defaultLikeCounts[projectId] || 50;
@@ -369,20 +275,17 @@ function initProjectLikes() {
         countEl.textContent = currentCount;
       }
 
-      // Sync live to Google Sheet backend
       syncWithGoogleSheet(projectId, delta);
     });
   });
 
-  // Fetch live global likes from Google Sheet if URL is configured
   fetchLiveLikesFromSheet();
 
-  // Card background click to open URL (excluding like button)
   const cards = document.querySelectorAll('.project-card');
   cards.forEach(card => {
     card.addEventListener('click', (e) => {
       if (e.target.closest('.like-btn')) return;
-      if (e.target.closest('.view-btn')) return; // Handled by <a> tag natively
+      if (e.target.closest('.view-btn')) return;
       const url = card.dataset.url;
       if (url) {
         window.open(url, '_blank', 'noopener,noreferrer');

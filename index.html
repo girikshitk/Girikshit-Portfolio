@@ -7,47 +7,58 @@
     <title>Girikshit Kumar - Product Designer & AI Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-  </head>
+    <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+</head>
   <body>
-    <!-- Neural Trail Canvas -->
-    <canvas id="neural-trail"></canvas>
-
-    <!-- Global Header -->
-    <header class="global-header">
-      <a href="#" class="brand">GIRIKSHIT</a>
-      <div class="header-right">
-        <a href="https://www.linkedin.com/in/girikshit-kumar-2129ba27b/" target="_blank" rel="noopener noreferrer" class="linkedin-btn interactive" aria-label="LinkedIn Profile">
-          <svg class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-          </svg>
-          <span>LinkedIn</span>
-          <i data-lucide="arrow-up-right" class="external-arrow"></i>
-        </a>
-      </div>
+    <!-- Sticky Navigation -->
+    <header class="nav" id="nav">
+      <a href="#hero" class="nav-brand">GIRIKSHIT</a>
+      <nav class="nav-links">
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#expertise" class="nav-link">Expertise</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+      <a href="https://www.linkedin.com/in/girikshit-kumar-2129ba27b/" target="_blank" rel="noopener noreferrer" class="nav-cta interactive" aria-label="LinkedIn Profile">
+        <svg class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+        </svg>
+        <span>LinkedIn</span>
+        <i data-lucide="arrow-up-right" class="external-arrow"></i>
+      </a>
     </header>
-
-
 
     <main>
       <!-- Hero Section -->
-      <section class="hero">
+      <section class="hero" id="hero">
         <div class="hero-bg-text">GIRIKSHIT KUMAR</div>
         <div class="hero-content">
-          <h1>High-Performance Visual Design meets Functional AI & 3D Engineering.</h1>
-          <a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" class="cta-button interactive">Launch Case Study <i data-lucide="arrow-right"></i></a>
+          <p class="hero-eyebrow">Product Designer &amp; AI Engineer</p>
+          <h1>High-Performance Visual Design meets Functional AI &amp; 3D Engineering.</h1>
+          <a href="https://girikshitk.github.io/Gaurdian-Web/" target="_blank" rel="noopener noreferrer" class="cta-button interactive">
+            <span>Launch Case Study</span>
+            <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+        <div class="hero-scroll-hint">
+          <span>Scroll</span>
+          <div class="scroll-line"></div>
         </div>
       </section>
 
       <!-- The Work Grid -->
-      <section class="work-section" id="work">
-        <h2>The Work.</h2>
+      <section class="work-section reveal" id="work">
+        <div class="section-header">
+          <span class="section-index">01</span>
+          <h2>The Work.</h2>
+        </div>
         <div class="project-grid">
-          
+
           <!-- Gaurdian Card -->
           <div class="project-card interactive" id="card-gaurdian" data-url="https://girikshitk.github.io/Gaurdian-Web/">
-            <div class="card-bg"></div>
             <div class="card-content">
               <h3>Gaurdian</h3>
               <p>SOS Mobility System</p>
@@ -59,9 +70,7 @@
                 <span class="dot green"></span>
                 <span class="title">ai_triage.py - GaurdianCV</span>
               </div>
-              <div class="terminal-body" id="gaurdian-terminal">
-                <!-- Log injected via JS -->
-              </div>
+              <div class="terminal-body" id="gaurdian-terminal"></div>
             </div>
             <div class="card-actions">
               <button type="button" class="action-btn like-btn interactive" data-project="gaurdian" aria-label="Like Gaurdian">
@@ -79,11 +88,10 @@
 
           <!-- Valueline Card -->
           <div class="project-card interactive card-3d" id="card-valueline" data-url="https://valueline-3d-viewer.netlify.app/">
-             <div class="card-content">
+            <div class="card-content">
               <h3>Valueline</h3>
               <p>3D Experience</p>
             </div>
-            <!-- Simulated Rotating 3D Object or actual webgl if needed, for simplicity we'll do CSS 3D cubes/tiles -->
             <div class="cube-container">
               <div class="cube">
                 <div class="face front">V</div>
@@ -111,8 +119,8 @@
           <!-- Visual Craft 2D Pixel Art Game Card -->
           <div class="project-card interactive" id="card-pixelgame" data-url="https://www.behance.net/gallery/228367639/My-First-Game-Design-Project">
             <div class="card-content">
-               <h3>Visual Craft</h3>
-               <p>2D Pixel Art Game</p>
+              <h3>Visual Craft</h3>
+              <p>2D Pixel Art Game</p>
             </div>
             <div class="pixel-sprite"></div>
             <div class="card-actions">
@@ -186,13 +194,37 @@
         </div>
       </section>
 
-
       <!-- Technical Competencies -->
-      <section class="competencies-section">
-         <h2>Technical Competencies.</h2>
-         <div class="chart-container">
-           <canvas id="competencyChart"></canvas>
-         </div>
+      <section class="competencies-section reveal" id="expertise">
+        <div class="section-header">
+          <span class="section-index">02</span>
+          <h2>Technical Competencies.</h2>
+        </div>
+        <div class="chart-container">
+          <canvas id="competencyChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="contact-section reveal" id="contact">
+        <div class="section-header">
+          <span class="section-index">03</span>
+          <h2>Contact.</h2>
+        </div>
+        <div class="contact-content">
+          <p class="contact-lead">Open to collaborations in product design, AI engineering, and 3D experiences.</p>
+          <a href="https://www.linkedin.com/in/girikshit-kumar-2129ba27b/" target="_blank" rel="noopener noreferrer" class="contact-link interactive">
+            <svg class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+            </svg>
+            <span>Connect on LinkedIn</span>
+            <i data-lucide="arrow-up-right" class="external-arrow"></i>
+          </a>
+        </div>
+        <footer class="site-footer">
+          <span>GIRIKSHIT KUMAR</span>
+          <span class="footer-meta">Product Designer &amp; AI Engineer</span>
+        </footer>
       </section>
 
     </main>
