@@ -7,11 +7,26 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 20);
 }, { passive: true });
 
+const sectionLinks = [...document.querySelectorAll('.nav-link')];
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    sectionLinks.forEach((link) => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+    });
+  });
+}, { rootMargin: '-35% 0px -55% 0px' });
+
+sectionLinks.forEach((link) => {
+  const section = document.querySelector(link.getAttribute('href'));
+  if (section) sectionObserver.observe(section);
+});
+
 // --- CUSTOM CURSOR ---
 const cursor = document.querySelector('.custom-cursor');
 const cursorDot = document.querySelector('.cursor-dot');
 const cursorRing = document.querySelector('.cursor-ring');
-const finePointer = window.matchMedia('(pointer: fine)').matches;
+const finePointer = window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let cursorClickTimer;
 
 if (finePointer) {
@@ -60,18 +75,20 @@ if (finePointer) {
 const menuBtn = document.getElementById('menuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 menuBtn.addEventListener('click', () => {
-  menuBtn.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
+  const isOpen = menuBtn.classList.toggle('open');
+  mobileMenu.classList.toggle('open', isOpen);
+  menuBtn.setAttribute('aria-expanded', String(isOpen));
 });
 document.querySelectorAll('.mobile-menu-link').forEach(link => {
   link.addEventListener('click', () => {
     menuBtn.classList.remove('open');
     mobileMenu.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
   });
 });
 
 // --- SCROLL REVEAL ---
-const revealTargets = document.querySelectorAll('.project, .expertise, .contact, .upcoming-project');
+const revealTargets = document.querySelectorAll('.project, .expertise, .contact');
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -441,7 +458,7 @@ const defaultLikeCounts = {
   pixelgame: 45,
   redthumb: 31,
   aura: 61,
-  upcomingTrip: 11
+  tripPlanner: 11
 };
 
 async function syncWithGoogleSheet(projectId, delta) {
@@ -537,74 +554,5 @@ function initProjectLikes() {
     });
   });
 }
-
-const upcomingScreenDetails = {
-  upload: {
-    index: '01 / 05',
-    title: 'Upload once, start together.',
-    text: 'Drop in a screenshot, booking or rough plan. The trip workspace turns scattered details into a shared starting point for everyone.',
-    tags: ['AI assisted', 'Shared planning'],
-    image: '/upcoming-projects/Build_App_from_Data_(2).png',
-    alt: 'Upload itinerary screen'
-  },
-  itinerary: {
-    index: '02 / 05',
-    title: 'Turn a rough plan into a better day.',
-    text: 'A clear timeline keeps the group aligned while smart suggestions help move activities around for a smoother, more memorable trip.',
-    tags: ['Smart suggestions', 'Day planning'],
-    image: '/upcoming-projects/Build_App_from_Data_(1).png',
-    alt: 'Trip itinerary screen'
-  },
-  settle: {
-    index: '03 / 05',
-    title: 'Make shared spending feel simple.',
-    text: 'Every hotel, ticket and dinner is accounted for, with clean settlements that show exactly who pays whom without spreadsheet fatigue.',
-    tags: ['Expense splitting', 'Clear balances'],
-    image: '/upcoming-projects/Build_App_from_2Data.png',
-    alt: 'Expense settlements screen'
-  },
-  profile: {
-    index: '04 / 05',
-    title: 'Keep the people behind the plan in view.',
-    text: 'A lightweight group profile brings travelers, payment handles and shared context into one friendly place.',
-    tags: ['Group context', 'Travel profiles'],
-    image: '/upcoming-projects/Build_App_from_Data-1.png',
-    alt: 'Traveler profile screen'
-  },
-  overview: {
-    index: '05 / 05',
-    title: 'One calm view of the whole trip.',
-    text: 'See the itinerary, budget, bookings and AI suggestions together, so the next decision is always easy to find.',
-    tags: ['Trip overview', 'Bookings and budget'],
-    image: '/upcoming-projects/Build_App_from_Data.png',
-    alt: 'Trip overview screen'
-  }
-};
-
-const upcomingDetail = document.getElementById('upcomingDetail');
-const upcomingDetailIndex = upcomingDetail.querySelector('.upcoming-detail-index');
-const upcomingDetailTitle = document.getElementById('upcomingDetailTitle');
-const upcomingDetailText = document.getElementById('upcomingDetailText');
-const upcomingDetailTags = document.getElementById('upcomingDetailTags');
-const upcomingDetailImage = document.getElementById('upcomingDetailImage');
-
-document.querySelectorAll('.upcoming-screen[data-screen]').forEach((screen) => {
-  screen.addEventListener('click', () => {
-    const detail = upcomingScreenDetails[screen.dataset.screen];
-    if (!detail) return;
-
-    upcomingDetail.hidden = false;
-    upcomingDetailIndex.textContent = detail.index;
-    upcomingDetailTitle.textContent = detail.title;
-    upcomingDetailText.textContent = detail.text;
-    upcomingDetailTags.replaceChildren(...detail.tags.map((tag) => {
-      const tagElement = document.createElement('span');
-      tagElement.textContent = tag;
-      return tagElement;
-    }));
-    upcomingDetailImage.src = detail.image;
-    upcomingDetailImage.alt = detail.alt;
-  });
-});
 
 initProjectLikes();
