@@ -34,6 +34,31 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 revealTargets.forEach(el => revealObserver.observe(el));
 
+// --- SCROLL-DRIVEN PROJECT IMAGE COMPRESSION ---
+const projectImages = document.querySelectorAll('.project-image');
+let imageResizeFrame = 0;
+
+function updateProjectImageHeights() {
+  projectImages.forEach(image => {
+    const rect = image.getBoundingClientRect();
+    const travel = window.innerHeight + rect.height;
+    const progress = Math.min(1, Math.max(0, (window.innerHeight - rect.top) / travel));
+    const compression = 1 - (progress * 0.25);
+    const baseHeight = image.clientWidth * (10 / 16);
+    image.style.height = `${baseHeight * compression}px`;
+  });
+  imageResizeFrame = 0;
+}
+
+function requestImageResize() {
+  if (imageResizeFrame) return;
+  imageResizeFrame = window.requestAnimationFrame(updateProjectImageHeights);
+}
+
+window.addEventListener('scroll', requestImageResize, { passive: true });
+window.addEventListener('resize', requestImageResize, { passive: true });
+requestImageResize();
+
 // --- VALUELINE 3D CUBE INTERACTION ---
 const valuelineCard = document.getElementById('card-valueline');
 const cubeContainer = valuelineCard.querySelector('.cube-container');
