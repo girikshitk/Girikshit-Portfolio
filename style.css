@@ -678,7 +678,9 @@ main {
 
 .trip-project-image {
   display: block;
-  min-height: 390px;
+  height: 300px;
+  min-height: 0;
+  aspect-ratio: auto;
   padding: 0;
   overflow: hidden;
   border-radius: 0;
@@ -688,30 +690,8 @@ main {
 .trip-gallery {
   position: relative;
   width: 100%;
-  height: 390px;
+  height: 300px;
   overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
-}
-
-.trip-gallery::before,
-.trip-gallery::after {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  bottom: 0;
-  width: 12%;
-  pointer-events: none;
-  content: '';
-}
-
-.trip-gallery::before {
-  left: 0;
-  background: linear-gradient(90deg, rgba(223, 243, 235, 0.96), transparent);
-}
-
-.trip-gallery::after {
-  right: 0;
-  background: linear-gradient(270deg, rgba(248, 228, 207, 0.96), transparent);
 }
 
 .trip-gallery-track {
@@ -1697,11 +1677,11 @@ main {
   }
 
   .trip-project-image {
-    min-height: 320px;
+    height: 264px;
   }
 
   .trip-gallery {
-    height: 320px;
+    height: 264px;
   }
 
   .trip-gallery-item {
