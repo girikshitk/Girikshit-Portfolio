@@ -491,6 +491,140 @@ main {
   100% { background-position: 32px 0, 32px 4px, 36px -4px, 28px 0px; }
 }
 
+/* RedThumb3D Card specific */
+.redthumb-visual {
+  position: absolute;
+  top: 48%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px; height: 120px;
+  pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.print-bed {
+  width: 86px; height: 86px;
+  border: 1px dashed rgba(255, 68, 68, 0.4);
+  border-radius: 50%;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle, rgba(255, 68, 68, 0.08) 0%, transparent 70%);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.poke-silhouette {
+  width: 42px; height: 42px;
+  border: 2px solid #FF4444;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 15px rgba(255, 68, 68, 0.3);
+  transition: transform 0.4s ease;
+}
+.poke-silhouette::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  height: 2px;
+  background: #FF4444;
+  transform: translateY(-50%);
+}
+.poke-silhouette::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #111;
+  border: 2px solid #FF4444;
+}
+.print-scanline {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #FF4444, #CCFF00, transparent);
+  opacity: 0;
+  filter: drop-shadow(0 0 6px #FF4444);
+}
+#card-redthumb:hover .print-bed {
+  border-color: #FF4444;
+  box-shadow: 0 0 25px rgba(255, 68, 68, 0.25);
+  transform: scale(1.1);
+}
+#card-redthumb:hover .print-scanline {
+  opacity: 1;
+  animation: scanSweep 1.5s ease-in-out infinite alternate;
+}
+#card-redthumb:hover .poke-silhouette {
+  transform: rotate(20deg);
+}
+
+@keyframes scanSweep {
+  0% { top: 15%; opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { top: 85%; opacity: 0.3; }
+}
+
+/* AURA Earbud Card specific */
+.aura-visual {
+  position: absolute;
+  top: 48%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px; height: 120px;
+  pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.earbud-core {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-main);
+  z-index: 2;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.earbud-core i, .earbud-core svg {
+  width: 22px; height: 22px;
+  color: var(--text-main);
+  transition: color 0.3s ease;
+}
+.aura-wave {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.4s ease;
+}
+.aura-wave.ring-1 { width: 68px; height: 68px; }
+.aura-wave.ring-2 { width: 92px; height: 92px; border-style: dashed; }
+.aura-wave.ring-3 { width: 116px; height: 116px; border-color: rgba(204, 255, 0, 0.15); }
+
+#card-aura:hover .earbud-core {
+  border-color: var(--cyber-lime);
+  color: var(--cyber-lime);
+  box-shadow: 0 0 20px var(--cyber-lime-glow);
+  transform: scale(1.1);
+}
+#card-aura:hover .earbud-core i,
+#card-aura:hover .earbud-core svg {
+  color: var(--cyber-lime);
+}
+#card-aura:hover .aura-wave.ring-1 {
+  border-color: rgba(204, 255, 0, 0.4);
+  animation: auraPulse 1.8s ease-out infinite;
+}
+#card-aura:hover .aura-wave.ring-2 {
+  border-color: rgba(204, 255, 0, 0.3);
+  animation: auraPulse 1.8s ease-out infinite 0.4s;
+}
+#card-aura:hover .aura-wave.ring-3 {
+  border-color: rgba(204, 255, 0, 0.2);
+  animation: auraPulse 1.8s ease-out infinite 0.8s;
+}
+
+@keyframes auraPulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.12); opacity: 0.4; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+
 /* Competencies Section */
 .competencies-section {
   padding: 8rem 0 12rem;

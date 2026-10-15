@@ -276,9 +276,11 @@ new Chart(ctxChart, {
 
 // --- PROJECT SOCIAL LIKES & INTERACTIVE NAVIGATION ---
 const defaultLikeCounts = {
-  gaurdian: 248,
-  valueline: 189,
-  pixelgame: 164
+  gaurdian: 64,
+  valueline: 56,
+  pixelgame: 45,
+  redthumb: 31,
+  aura: 61
 };
 
 function initProjectLikes() {
@@ -287,13 +289,13 @@ function initProjectLikes() {
     const projectId = btn.dataset.project;
     if (!projectId) return;
 
-    const countKey = `portfolio_likes_${projectId}`;
-    const likedKey = `portfolio_user_liked_${projectId}`;
+    const countKey = `portfolio_v2_likes_${projectId}`;
+    const likedKey = `portfolio_v2_liked_${projectId}`;
 
     // Read stored count or fallback to baseline
     let count = parseInt(localStorage.getItem(countKey), 10);
     if (isNaN(count)) {
-      count = defaultLikeCounts[projectId] || 100;
+      count = defaultLikeCounts[projectId] || 50;
       localStorage.setItem(countKey, count);
     }
 
