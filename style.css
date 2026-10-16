@@ -1364,9 +1364,9 @@ main {
    ============================================ */
 
 .upcoming-project {
+  position: relative;
   padding: var(--s-8) 0 var(--s-7);
-  overflow: hidden;
-}
+} 
 
 .upcoming-intro {
   display: flex;
@@ -1429,9 +1429,10 @@ main {
 
 .upcoming-gallery {
   position: relative;
+  z-index: 1;
   width: 100vw;
   margin-left: 50%;
-  overflow: hidden;
+  overflow: visible;
   transform: translateX(-50%);
   padding: var(--s-3) 0 var(--s-4);
   mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent);
@@ -1457,6 +1458,7 @@ main {
 
 .upcoming-screen {
   position: relative;
+  z-index: 0;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -1488,6 +1490,11 @@ main {
   font-size: 0.78rem;
   font-weight: 600;
   transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.upcoming-screen:hover,
+.upcoming-screen:focus-visible {
+  z-index: 3;
 }
 
 .upcoming-screen:hover img,
